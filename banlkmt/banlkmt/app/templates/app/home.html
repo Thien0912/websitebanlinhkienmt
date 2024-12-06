@@ -1,0 +1,21 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block main_content %}
+<br>
+<div class="row" style="width:100%">
+  {% for product in products %}
+  <div class="col-lg-3">
+    <img class="thumbnail mx-auto d-block" src="{{product.ImageURL}}">
+    <div class="box-element product">
+      <h5><strong>{{product.name}}</strong></h5>
+      <button data-product= {{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to cart</button>
+      <a class="btn btn-outline-success" href="{% url 'detail' %}?id={{product.id}}">View</a>
+      <h5 style="display: inline-block; float: right; color: #ff0000;">{{product.price|intcomma}}₫</h5>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<br>
+<br>
+{% endblock main_content %}

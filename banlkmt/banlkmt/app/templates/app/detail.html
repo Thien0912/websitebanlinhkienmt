@@ -1,0 +1,38 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block detail %}
+{% for product in products %}
+<div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="images p-3">
+                            <div class="text-center p-4"> <img id="main-image" src={{product.ImageURL}} width="500" /> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Continue Shopping</a>
+                            </div>
+                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">Thông tin sản phẩm:</span>
+                                <h5 class="text-uppercase"><strong>{{product.name}}</h5></strong>
+                                <div class="price d-flex flex-row align-items-center">
+                                    <span class="act-price" style="color: red; font-size: 20px;">{{ product.price|intcomma }}₫</span>
+                                </div>                                
+                            </div>
+                            <div class="about" style="white-space: pre-wrap;">{{product.detail}}</div>
+                            <hr>
+                            <button data-product="{{ product.id }}" data-action="add" class="btn btn-warning text-uppercase mr-2 px-4 add-btn update-cart">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock detail %}

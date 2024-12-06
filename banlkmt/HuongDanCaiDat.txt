@@ -1,0 +1,6 @@
+Hướng dẫn cài đặt trang web bán linh kiện máy tính:
+- Bước 1: Cài đặt Visual Studio Code.
+- Bước 2: Giải nén file "banlkmt.rar"
+- Bước 3: Vào Visual Studio Code, mở file "banlkmt".
+- Bước 4: Trong Visual Studio Code, chọn Terminal -> New Terminal, chạy lệnh "pip install -r requirements.txt" trong hộp thoại Terminal để tải các thư viện.
+- Bước 5: Trong Terminal, chạy lệnh "python manage.py runserver" để mở trang web.

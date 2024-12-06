@@ -1,0 +1,89 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content_checkout %}
+     <div class="row" style="width:100%">
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+				<form method="POST" action="">
+					{% csrf_token %}
+					<div id="user-info">
+						<h4>Thông tin khách hàng:</h4>
+						<div class="form-field">
+							<p>Tên:</p>
+							{{c_form.name}}
+						</div>
+						<div class="form-field">
+							<p>Số điện thoại:</p>
+							{{c_form.number}}
+						</div>
+					</div>
+					<hr>
+					<div id="shipping-info">
+						<h4>Địa chỉ giao hàng:</h4>
+						<div class="form-field">
+							<p>Thành phố/Tỉnh:</p>
+							{{c_form.city}}
+						</div>
+						<div class="form-field">
+							<p>Quận/Huyện:</p>
+							{{c_form.district}}
+						</div>
+						<div class="form-field">
+							<p>Thị xã/Thị trấn</p>
+							{{c_form.town}}
+						</div>
+						<div class="form-field">
+							<p>Ấp:</p>
+							{{c_form.hamlet}}
+						</div>
+					</div>
+					<hr>
+					<div id="user-info">
+						<h4>Thông tin thanh toán:</h4>
+						<div class="form-field">
+							<p>Ngân hàng:</p>
+							{{c_form.bank}}	
+						</div>
+						<div class="form-field">
+							<p>Số thẻ:</p>
+							{{c_form.card_number}}
+						</div>
+					</div>
+					<hr>
+					<input id="form-button" class="btn btn-success btn-block" type="submit" value="Xác nhận thanh toán">
+				</form>
+			</div>
+			<br>
+		</div>
+		<div class="col-lg-6">
+			<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Quay lại giỏ hàng</a>
+			<hr>
+			<h3>ĐƠN HÀNG</h3>
+			<br>
+			<div class="box-element" style="display: flex; flex-direction: column; justify-content: center;">
+				<div class="cart-row" style="display: flex;">
+					<div style="flex:2"></div>
+					<div style="flex:3"><strong>Tên sản phẩm</strong></div>
+					<div style="flex:2"><strong>Giá</strong></div>
+					<div style="flex:1"><strong>Số lượng</strong></div>
+					<div style="flex:1"><strong>Tổng tiền</strong></div>
+				</div>
+				{% for item in items %}
+					<div class="cart-row">
+						<div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
+						<div style="flex:3"><p>{{item.product.name}}</p></div>
+						<div style="flex:2"><p>{{item.product.price|intcomma}}₫</p></div>
+						<div style="flex:1"><p>{{item.quantity}}</p></div>
+						<div style="flex:1"><p>{{item.get_total|intcomma}}</p></div>
+					</div>
+				{% endfor %}
+			</div>
+			<hr>
+			<h5>Số lượng: {{order.get_cart_items}}</h5>
+			<h5>Tổng: {{order.get_cart_total|intcomma}}₫</h5>
+		</div>
+	</div>
+	<br>
+	<br>
+{% endblock content_checkout %}
